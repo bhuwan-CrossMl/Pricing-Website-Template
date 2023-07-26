@@ -3,6 +3,7 @@ import { MenuList } from "../data/data";
 import Layout from "./../components/Layout/Layout";
 import {
   Box,
+  Container,
   Card,
   CardActionArea,
   CardContent,
@@ -10,10 +11,11 @@ import {
   Typography,
 } from "@mui/material";
 
+
 const Menu = () => {
   return (
     <Layout>
-      <Box sx={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
+      <Container maxWidth="xl"  sx={{ display: "flex", flexWrap: "wrap", justifyContent: "center" ,marginTop:"100px"}}>
         {MenuList.map((menu) => (
           <Card sx={{ maxWidth: "390px", display: "flex", m: 2 }}>
             <CardActionArea>
@@ -32,7 +34,7 @@ const Menu = () => {
             </CardActionArea>
           </Card>
         ))}
-      </Box>
+      </Container>
     </Layout>
   );
 };

@@ -1,11 +1,11 @@
 import React from "react";
 import Layout from "./../components/Layout/Layout";
-import { Box, Typography } from "@mui/material";
+import { Box,Container, Typography } from "@mui/material";
 
 const About = () => {
   return (
     <Layout>
-      <Box
+      <Container component="main" maxWidth="xl"
         sx={{
           my: 15,
           textAlign: "center",
@@ -56,7 +56,7 @@ const About = () => {
           tempore voluptatibus perferendis esse eaque temporibus porro?
           Aspernatur beatae deleniti illo autem!
         </p>
-      </Box>
+      </Container>
     </Layout>
   );
 };

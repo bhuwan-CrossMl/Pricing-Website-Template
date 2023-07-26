@@ -3,6 +3,13 @@ import Layout from "./../components/Layout/Layout";
 import { Link } from "react-router-dom";
 import Banner from "../images/banner.jpeg";
 import "../styles/HomeStyles.css";
+import {
+  Box,
+Container
+} from "@mui/material";
+
+
+
 
 const Home = () => {
   return (

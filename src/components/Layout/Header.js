@@ -5,57 +5,61 @@ import {
   Divider,
   Drawer,
   IconButton,
-  Toolbar,
-  Typography,
+  Container,
+  List,
+  ListItem,
+  ListItemText,
+  Toolbar
 } from "@mui/material";
 import Logo from "../../images/logo.svg";
-
 import MenuIcon from "@mui/icons-material/Menu";
 import { NavLink } from "react-router-dom";
 import "../../styles/HeaderStyles.css";
+
 const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
-  // hndle menu click
+  //---- Handle SideBar Menu Click
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-  //menu drawer
+
+  // ------Define Hearder/navigation items
+  const Pages = [
+    { label: "Home", to: "/" },
+    { label: "Menu", to: "/menu" },
+    { label: "About", to: "/about" },
+    { label: "Contact", to: "/contact" },
+  ];
+
+  // ------Create SideBar Nevigation for Items
+  const navigationLinks = Pages.map((item, index) => (
+    <ListItem
+      key={index}
+      component={NavLink}
+      to={item.to}
+      onClick={handleDrawerToggle}
+    >
+      <ListItemText primary={item.label} />
+    </ListItem>
+  ));
+
+  //-------SideBar Menu Drawer-For Mobile/sm
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
-      <Typography
-        color={"goldenrod"}
-        variant="h6"
-        component="div"
-        sx={{ flexGrow: 1, my: 2 }}
-      >
-        <img src={Logo} alt="logo" height={"70"} width="200" />
-      </Typography>
+      <img src={Logo} alt="logo" height={"70"} width="200" />
       <Divider />
-      <ul className="mobile-navigation">
-        <li>
-          <NavLink activeClassName="active" to={"/"}>
-            Home
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to={"/menu"}>Menu</NavLink>
-        </li>
-        <li>
-          <NavLink to={"/about"}>About</NavLink>
-        </li>
-        <li>
-          <NavLink to={"/contact"}>Contact</NavLink>
-        </li>
-      </ul>
+      {/* ---------for hr/vr Line---------- */}
+      <List className="mobile-navigation">{navigationLinks}</List>
     </Box>
   );
+
   return (
     <>
-      <Box>
-        <AppBar component={"nav"} sx={{ bgcolor: "black" }}>
+      <Container component="main" maxWidth="xl" sx={{ mb: 4 }}>
+        {/* ------------------------TopBar/Header --------------------------> */}
+        <AppBar component={"nav"}>
           <Toolbar>
             <IconButton
-              color="inherit"
               aria-label="open drawer"
               edge="start"
               sx={{
@@ -66,34 +70,16 @@ const Header = () => {
             >
               <MenuIcon />
             </IconButton>
-            <Typography
-              color={"goldenrod"}
-              variant="h6"
-              component="div"
-              sx={{ flexGrow: 1 }}
-            >
+            <Box color={"goldenrod"} component="div" sx={{ flexGrow: 1 }}>
               <img src={Logo} alt="logo" height={"70"} width="250" />
-            </Typography>
+            </Box>
             <Box sx={{ display: { xs: "none", sm: "block" } }}>
-              <ul className="navigation-menu">
-                <li>
-                  <NavLink activeClassName="active" to={"/"}>
-                    Home
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to={"/menu"}>Menu</NavLink>
-                </li>
-                <li>
-                  <NavLink to={"/about"}>About</NavLink>
-                </li>
-                <li>
-                  <NavLink to={"/contact"}>Contact</NavLink>
-                </li>
-              </ul>
+              <List className="navigation-menu">{navigationLinks}</List>
             </Box>
           </Toolbar>
         </AppBar>
+
+        {/* ------------------------Side Bar/For Sm Screen --------------------------> */}
         <Box component="nav">
           <Drawer
             variant="temporary"
@@ -110,10 +96,7 @@ const Header = () => {
             {drawer}
           </Drawer>
         </Box>
-        <Box>
-          <Toolbar />
-        </Box>
-      </Box>
+      </Container>
     </>
   );
 };
